@@ -1,0 +1,22 @@
+{
+  "name": "iana-languagesubtagregistry-jsonparser",
+  "version": "0.0.1",
+  "description": "A parser that converts the iana language subtag registry to JSON",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Code-Y/IANA-LanguageSubtagRegistry-JSONParser.git"
+  },
+  "keywords": [
+    "IANA Language Subtag Registry"
+  ],
+  "author": "Code-Y",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Code-Y/IANA-LanguageSubtagRegistry-JSONParser/issues"
+  },
+  "homepage": "https://github.com/Code-Y/IANA-LanguageSubtagRegistry-JSONParser#readme"
+}
