@@ -2,10 +2,14 @@
 
 var fs = require('fs');
 var adapter = require('./TextToJsonAdapter');
+var filename = '20160321_language-subtag-registry.txt';
+const ENCODING = 'utf-8';
 
-var data = fs.readFileSync('./data/20160321_language-subtag-registry.txt', 'utf-8');
+var data = fs.readFileSync(`./data/${filename}`, ENCODING);
 var result = adapter(data);
-console.log(result.list.length);
 
-//result.list.forEach(i => console.log(i));
-//console.log(1, result.list);
+fs.writeFileSync(
+  `./dist/${filename}.json`,
+  JSON.stringify(result, null, 2),
+  {encoding: ENCODING}
+);
