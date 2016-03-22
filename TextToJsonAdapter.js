@@ -6,39 +6,33 @@
  */
 module.exports = textToJsonAdapter;
 
-const LANGUAGE_SEPARATOR = "%%";
+var toCamelCase = require('camelcase');
+const LANGUAGE_SEPARATOR = /\s%%\s/;
+const LB_REGEX = /\n/gi;
+const COLON_REGEX = /:\s|\s/gi;
+
 function textToJsonAdapter(text) {
-  let data = text
+  let body = text
     .split(LANGUAGE_SEPARATOR)
-    .map(i => i.split(/\n ?/))
-    .map(i => i.filter(j => !!j))
+    .map(i => {
+      let res = {};
+
+      i.split(LB_REGEX).forEach(j => {
+        let item = j.split(COLON_REGEX);
+        let key = toCamelCase(item.shift().toLowerCase());
+        let value = item.pop()
+
+        res[key] = value;
+      });
+
+      return res;
+    })
     ;
 
-  let headings = data
-    .shift()
-    .filter(i => !!i)
-    .map(i => (i || '').trim().split(/: ?/))
-    .shift()
-    ;
 
-  headings = [
-    {
-      key: headings.shift().trim().toLowerCase(),
-      value: new Date(...headings.shift().trim().split(/- ?/))
-    }
-  ];
+  let header = [body.shift()];
 
-  var list = [];
-  for(var z = 0; z < data.length; z++) {
-    list[z] = {};
-    for(var x = 0; x < data[z].length; x++) {
-      var obj = data[z][x].split(/: ?/);
-      list[z][obj[0].toLowerCase()] = obj[1];
-    }
-  }
 
-  return {
-    meta: headings,
-    list
-  };
+
+  return {header, body};
 }
