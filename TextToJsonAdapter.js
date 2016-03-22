@@ -20,7 +20,7 @@ function textToJsonAdapter(text) {
       i.split(LB_REGEX).forEach(j => {
         let item = j.split(COLON_REGEX);
         let key = toCamelCase(item.shift().toLowerCase());
-        let value = item.pop()
+        let value = item.pop();
 
         res[key] = value;
       });
@@ -29,9 +29,7 @@ function textToJsonAdapter(text) {
     })
     ;
 
-
   let header = [body.shift()];
-
 
 
   return {header, body};
