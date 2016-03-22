@@ -10,6 +10,7 @@ var toCamelCase = require('camelcase');
 const LANGUAGE_SEPARATOR = /\s%%\s/;
 const LB_REGEX = /\n/gi;
 const COLON_REGEX = /:\s|\s/gi;
+var isRawDate = v => /^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$/.test(v);
 
 function textToJsonAdapter(text) {
   let body = text
@@ -21,6 +22,25 @@ function textToJsonAdapter(text) {
         let item = j.split(COLON_REGEX);
         let key = toCamelCase(item.shift().toLowerCase());
         let value = item.pop();
+
+        if(isRawDate(value)) {
+          value = new Date(
+            Date.UTC(...value
+            .split('-')
+            .map((item, index) => {
+              item = Number(item);
+
+              switch(index) {
+
+                case 1:
+                  --item;
+                  break;
+              }
+
+              return item;
+            }))
+          );
+        }
 
         res[key] = value;
       });
