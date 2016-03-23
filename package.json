@@ -20,6 +20,5 @@
   },
   "homepage": "https://github.com/Code-Y/IANA-LanguageSubtagRegistry-JSONParser#readme",
   "dependencies": {
-    "camelcase": "^2.1.1"
   }
 }
