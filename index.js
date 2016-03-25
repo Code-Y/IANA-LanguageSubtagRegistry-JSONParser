@@ -13,7 +13,7 @@ class IANAParser {
     return REGISTRY_URL;
   }
 
-  parser() {
+  parse() {
     return parser.apply(this, arguments);
   }
 
@@ -26,7 +26,7 @@ class IANAParser {
             res
               .setEncoding("utf8")
               .on('data', (chunk) => (body += chunk))
-              .on('end', () => resolve(this.parser(body)))
+              .on('end', () => resolve(this.parse(body)))
             ;
 
           })
