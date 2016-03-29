@@ -1,6 +1,6 @@
 {
   "name": "iana-languagesubtagregistry-jsonparser",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A parser that converts the iana language subtag registry to JSON",
   "main": "index.js",
   "scripts": {
