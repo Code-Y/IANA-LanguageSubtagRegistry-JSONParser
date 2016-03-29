@@ -38,8 +38,7 @@ function textToJsonAdapter(text) {
         let value = item.pop();
 
         if(isRawDate(value)) {
-          value = new Date(
-            Date.UTC(...value
+          let date = value
             .split('-')
             .map((item, index) => {
               item = Number(item);
@@ -52,7 +51,10 @@ function textToJsonAdapter(text) {
               }
 
               return item;
-            }))
+            });
+            
+          value = new Date(
+            Date.UTC(date[0], date[1], date[2])
           );
         }
 
